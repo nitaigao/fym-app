@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20150612081241) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

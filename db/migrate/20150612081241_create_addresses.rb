@@ -1,7 +1,7 @@
 class CreateAddresses < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
-    	t.references :user
+    	t.belongs_to :user, index: true
     	t.string :email
       t.timestamps null: false
     end

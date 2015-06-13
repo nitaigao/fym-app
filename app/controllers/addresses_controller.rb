@@ -7,10 +7,10 @@ class AddressesController < ApplicationController
 	end
 
 	def index
-		@addresses = current_user.addresses.map { |address| "#{address.email}@mailed.cf" }
+		@addresses = current_user.addresses.map { |address| "#{address.mask}@mailed.cf" }
 	end
 
 	def show 
-		@address = Address.find_by!(email: params[:id])
+		@address = Address.find_by!(mask: params[:id])
 	end
 end

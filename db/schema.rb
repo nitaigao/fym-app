@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150612081241) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "email"
+    t.string   "mask"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

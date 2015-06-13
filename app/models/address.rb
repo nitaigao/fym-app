@@ -1,9 +1,9 @@
 class Address < ActiveRecord::Base
 	belongs_to :user
 
-	before_create :generate_email
+	before_create :generate_hash
 
-  def generate_email
-    self.email = SecureRandom.hex(4)
+  def generate_hash
+    self.mask = SecureRandom.hex(4)
   end
 end

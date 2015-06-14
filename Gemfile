@@ -44,5 +44,10 @@ group :development, :test do
   gem 'spring'
 end
 
+group :production do
+	gem 'puma'
+	gem 'rails_12factor'
+end
+
 gem 'haml'
 gem 'devise'

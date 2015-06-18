@@ -10,6 +10,7 @@ class AddressesController < ApplicationController
   # GET /addresses/1
   # GET /addresses/1.json
   def show
+
   end
 
   # GET /addresses/new
@@ -64,7 +65,7 @@ class AddressesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_address
-      @address = Address.find(params[:id])
+      @address = Address.find_by!(mask: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

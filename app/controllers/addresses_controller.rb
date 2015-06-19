@@ -19,14 +19,10 @@ class AddressesController < ApplicationController
   def create
     @address = current_user.addresses.build(address_params)
     
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
-      else
-        format.html { render :new }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    if @address.save
+      redirect_to addresses_path
+    else
+      render :new
     end
   end
 

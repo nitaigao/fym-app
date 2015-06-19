@@ -3,7 +3,42 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def sign_in(user)
+    cookies[:sign_in] = user.id
+  end
+
+  def sign_out
+    cookies.delete(:sign_in)
+  end
+
+  def logged_in
+    cookies[:sign_in]
+  end
+
+  def current_user
+    @current_user = User.find(logged_in)
+  end
+
   def authenticate_user!
-    redirect_to new_session_path
+    if not logged_in
+      redirect_to new_session_path
+    end
+  end
+
+  def maybe_login_from_token
+    Rails.logger.info "maybe_login_from_token: '#{ params[:token] }'"
+    return if (token = params[:token]).blank?
+   
+    user = User.find_by(encrypted_token: token)
+    if user
+      Rails.logger.info "One time login token used for user #{ user.id }"
+      sign_in(user)
+    else
+      Rails.logger.info "No user found from token: '#{ token }'"
+    end
+   
+    # strip token regardless of success
+    redirect_to request.path,
+                params.except(:token, :action, :controller)
   end
 end

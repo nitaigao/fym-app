@@ -1,9 +1,9 @@
 class AddressesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :maybe_login_from_token, :authenticate_user!, except: [:show]
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   def index
-    @addresses = Address.all
+    @addresses = current_user.addresses
   end
 
   def show

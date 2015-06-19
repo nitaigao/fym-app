@@ -6,10 +6,17 @@
 #
 one: {
   email: a@a.com
+  password "password"
+  password_confirmation "password"
+  confirmed_at Date.today
 }
 # column: value
 #
 two: {
   email: b@b.com
+  password "password"
+  password_confirmation "password"
+  confirmed_at Date.today
 }
+
 #  column: value

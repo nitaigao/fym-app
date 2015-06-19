@@ -1,10 +1,14 @@
 require 'test_helper'
 
+
 class AddressesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
     @address = addresses(:one)
+    sign_in(users(:one))
+    # @user = FactoryGirl.create :user
+    # sign_in @user
   end
 
   test "should get index" do

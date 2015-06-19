@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @address = addresses(:one)
   end
@@ -46,4 +48,5 @@ class AddressesControllerTest < ActionController::TestCase
 
     assert_redirected_to addresses_path
   end
+  
 end

@@ -10,4 +10,8 @@ class Address < ActiveRecord::Base
 	def email
 		"#{self.mask}@mailed.cf"
 	end
+
+  def to_param
+    mask
+  end
 end

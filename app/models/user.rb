@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
   has_many :addresses
+
+  def new_token!
+    SecureRandom.hex(16).tap do |random_token|
+      update_attributes encrypted_token: random_token
+      Rails.logger.info("Set new token for user #{ id }")
+    end
+  end
 end

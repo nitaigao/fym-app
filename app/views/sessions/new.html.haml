@@ -1,0 +1,3 @@
+= form_tag sessions_url, method: :post do
+  = text_field_tag :email, @email, placeholder: 'Email'
+  = button_tag "Send Login Email"

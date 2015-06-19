@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    u = User.find_by!(email: new_session_params[:email])
-    u.new_token!
-    UserTokenMailer.login_email(u).deliver_now
+    user = User.find_or_create_by(email: new_session_params[:email])
+    user.new_token!
+    UserTokenMailer.login_email(user).deliver_now
   end
 
   def destroy

@@ -9,6 +9,6 @@ class SessionsControllerTest < ActionController::TestCase
   test "redirect to addresses if a valid token is presented" do
     user = users(:one)
     get :index, token: user[:encrypted_token]
-    assert_redirected_to :addresses
+    assert_redirected_to root_path
   end
 end

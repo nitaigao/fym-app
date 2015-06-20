@@ -23,7 +23,7 @@ class AddressesControllerTest < ActionController::TestCase
       post :create, address: {  }
     end
 
-    assert_redirected_to addresses_path
+    assert_redirected_to root_path
   end
 
   test "should show address" do

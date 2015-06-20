@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       user = User.find_by(encrypted_token: token)
       if user
         sign_in(user)
-        redirect_to :addresses, params.except(:token, :action, :controller)
+        redirect_to root_path, params.except(:token, :action, :controller)
       else
         redirect_to new_session_path
       end

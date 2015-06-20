@@ -22,7 +22,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       @address = current_user.addresses.build(address_params)
       if @address.save
-        format.html { redirect_to addresses_path }
+        format.html { redirect_to root_path }
         format.json { render :create, status: :ok, location: @address }
       else
         format.html { render :new }

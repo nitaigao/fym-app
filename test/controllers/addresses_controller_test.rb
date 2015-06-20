@@ -1,11 +1,10 @@
 require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
-
   setup do
+    @user = users(:one)
     @address = addresses(:one)
-    sign_in(users(:one))
+    cookies[:sign_in] = @user.id
   end
 
   test "should get index" do
@@ -24,7 +23,7 @@ class AddressesControllerTest < ActionController::TestCase
       post :create, address: {  }
     end
 
-    assert_redirected_to address_path(assigns(:address))
+    assert_redirected_to addresses_path
   end
 
   test "should show address" do
@@ -50,4 +49,8 @@ class AddressesControllerTest < ActionController::TestCase
     assert_redirected_to addresses_path
   end
   
+  test "redirect to login if an invalid token is presented" do
+    get :index, token: "bla"
+    assert_redirected_to new_session_path
+  end
 end

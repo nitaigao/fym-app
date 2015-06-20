@@ -31,14 +31,10 @@ class ApplicationController < ActionController::Base
    
     user = User.find_by(encrypted_token: token)
     if user
-      Rails.logger.info "One time login token used for user #{ user.id }"
       sign_in(user)
+      redirect_to request.path, params.except(:token, :action, :controller)
     else
-      Rails.logger.info "No user found from token: '#{ token }'"
+      redirect_to new_session_path
     end
-   
-    # strip token regardless of success
-    redirect_to request.path,
-                params.except(:token, :action, :controller)
   end
 end

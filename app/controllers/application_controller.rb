@@ -24,17 +24,4 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path
     end
   end
-
-  def maybe_login_from_token
-    Rails.logger.info "maybe_login_from_token: '#{ params[:token] }'"
-    return if (token = params[:token]).blank?
-   
-    user = User.find_by(encrypted_token: token)
-    if user
-      sign_in(user)
-      redirect_to request.path, params.except(:token, :action, :controller)
-    else
-      redirect_to new_session_path
-    end
-  end
 end

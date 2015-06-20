@@ -48,9 +48,4 @@ class AddressesControllerTest < ActionController::TestCase
 
     assert_redirected_to addresses_path
   end
-  
-  test "redirect to login if an invalid token is presented" do
-    get :index, token: "bla"
-    assert_redirected_to new_session_path
-  end
 end

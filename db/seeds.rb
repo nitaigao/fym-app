@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-u = User.create!({:email => "test@example.com" })
+u = User.create!({:email => "test@example.com", :encrypted_token => "abcd" })
 a = u.addresses.create!
 a.name = "Test"
 a.mask = "a8s7d89a"

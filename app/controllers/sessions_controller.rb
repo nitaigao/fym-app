@@ -1,4 +1,18 @@
 class SessionsController < ApplicationController
+  def index
+    if (token = params[:token]).blank?
+      redirect_to new_session_path 
+    else
+      user = User.find_by(encrypted_token: token)
+      if user
+        sign_in(user)
+        redirect_to :addresses, params.except(:token, :action, :controller)
+      else
+        redirect_to new_session_path
+      end
+    end
+  end
+
   def new
     @email = ""  
   end

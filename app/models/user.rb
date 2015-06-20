@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :addresses
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 
   def new_token!
     SecureRandom.hex(16).tap do |random_token|

@@ -14,15 +14,19 @@ class SessionsController < ApplicationController
   end
 
   def new
-    @email = ""  
+    @user = User.new
   end
 
   def create
-    user = User.find_or_create_by(email: email)
-    user.new_token!
-    UserTokenMailer.login_email(user).deliver_now
-    @user, @domain, @tld = email.match(/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+).(.[a-zA-Z]{2,4})/).captures
-    @host = "#{@domain}.#{@tld}"
+    @user = User.find_or_initialize_by(email: email)
+    if @user.save
+      @user.new_token!
+      UserTokenMailer.login_email(@user).deliver_now
+      u, @domain, @tld = email.match(/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+).(.[a-zA-Z]{2,4})/).captures
+      @host = "#{@domain}.#{@tld}"
+    else
+      render :new
+    end
   end
 
   def destroy

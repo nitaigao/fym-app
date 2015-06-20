@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should mail a token to the email address" do
+    assert(false)
+  end
 end

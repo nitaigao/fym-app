@@ -2,6 +2,8 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
+  skip_before_filter  :verify_authenticity_token, only: [:create]
+
   def index
     @addresses = current_user.addresses
   end
@@ -17,12 +19,15 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = current_user.addresses.build(address_params)
-    
-    if @address.save
-      redirect_to addresses_path
-    else
-      render :new
+    respond_to do |format|
+      @address = current_user.addresses.build(address_params)
+      if @address.save
+        format.html { redirect_to addresses_path }
+        format.json { render :create, status: :ok, location: @address }
+      else
+        format.html { render :new }
+        format.json { render json: @address.errors, status: :unprocessable_entity }
+      end
     end
   end
 

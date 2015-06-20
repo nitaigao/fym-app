@@ -48,4 +48,16 @@ class AddressesControllerTest < ActionController::TestCase
 
     assert_redirected_to addresses_path
   end
+
+  test "json should return unauthorized if not logged in" do
+    session[:user_id] = nil
+    post :create, address: {  }, format: :json
+    assert_response :unauthorized
+  end
+
+  test "json should return the new email" do
+    post :create, address: { name: "Test Address"  }, format: :json
+    assert_response :success
+    assert_not response.body["email"].blank?
+  end
 end

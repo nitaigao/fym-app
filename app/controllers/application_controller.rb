@@ -21,7 +21,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if not logged_in
-      redirect_to new_session_path
+      respond_to do |format|
+        format.html { redirect_to new_session_path }
+        format.json { render :json => [], :status => :unauthorized }
+      end
     end
   end
 end

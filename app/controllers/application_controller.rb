@@ -4,15 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def sign_in(user)
-    cookies[:sign_in] = user.id
+    session[:user_id] = user.id
   end
 
   def sign_out
-    cookies.delete(:sign_in)
+    session.delete(:user_id)
   end
 
   def logged_in
-    cookies[:sign_in]
+    session[:user_id]
   end
 
   def current_user

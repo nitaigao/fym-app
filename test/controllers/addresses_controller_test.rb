@@ -4,7 +4,7 @@ class AddressesControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
     @address = addresses(:one)
-    cookies[:sign_in] = @user.id
+    session[:user_id] = @user.id
   end
 
   test "should get index" do

@@ -21,7 +21,8 @@ class SessionsController < ApplicationController
     @user = User.find_or_initialize_by(email: email)
     if @user.save
       @user.new_token!
-      UserTokenMailer.login_email(@user).deliver_now
+      url = url_for controller: :sessions, token: @user.encrypted_token
+      UserTokenMailer.login_email(@user, url).deliver_now
       u, @domain, @tld = email.match(/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+).(.[a-zA-Z]{2,4})/).captures
       @host = "#{@domain}.#{@tld}"
     else

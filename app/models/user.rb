@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :addresses
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
+
+  def remember_me
+    (super == nil) ? '1' : super
+  end
 end

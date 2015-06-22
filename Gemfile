@@ -54,3 +54,4 @@ group :production do
 end
 
 gem 'haml'
+gem 'devise'

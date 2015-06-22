@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :addresses
   resources :sessions,  only: [:index, :new, :create]
   get '/sessions/destroy', to: 'sessions#destroy', as: 'destroy_session'

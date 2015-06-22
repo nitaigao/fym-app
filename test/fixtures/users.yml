@@ -1,8 +1,9 @@
 one: {
   email: a@a.com,
-  encrypted_token: abcd
+  encrypted_password: abcd
 }
 
 two: {
-  email: b@b.com
+  email: b@b.com,
+  encrypted_password: abcd
 }

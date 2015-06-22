@@ -1,10 +1,12 @@
 require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @user = users(:one)
     @address = addresses(:one)
-    session[:user_id] = @user.id
+    sign_in(@user)
   end
 
   test "should get index" do
@@ -50,7 +52,7 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "json should return unauthorized if not logged in" do
-    session[:user_id] = nil
+    sign_out(@user)
     post :create, address: {  }, format: :json
     assert_response :unauthorized
   end

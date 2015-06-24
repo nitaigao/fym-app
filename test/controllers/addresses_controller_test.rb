@@ -40,7 +40,7 @@ class AddressesControllerTest < ActionController::TestCase
 
   test "should update address" do
     patch :update, id: @address, address: {  }
-    assert_redirected_to address_path(assigns(:address))
+    assert_redirected_to root_path
   end
 
   test "should destroy address" do
@@ -48,7 +48,7 @@ class AddressesControllerTest < ActionController::TestCase
       delete :destroy, id: @address
     end
 
-    assert_redirected_to addresses_path
+    assert_redirected_to root_path
   end
 
   test "json should return unauthorized if not logged in" do

@@ -32,21 +32,15 @@ class AddressesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
-      else
-        format.html { render :edit }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    if @address.update(address_params)
+      redirect_to root_path, notice: 'Address was successfully updated.'
     end
   end
 
   def destroy
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Address was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
